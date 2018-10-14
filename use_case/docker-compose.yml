@@ -1,0 +1,46 @@
+version: '2'
+
+
+services:
+    mongodb:
+        build: 
+            ./mongodb
+        image: 
+            duchaxello/mongo:1.0
+        container_name:
+            mongodb_2
+        ports:
+            - "27017:27017"
+        networks:
+            net_local:
+                ipv4_address: 10.48.0.2
+    node: 
+        build: ./node
+        image: 
+            duchaxello/node_bus_pau:3.0
+        container_name: 
+            node_2
+        networks: 
+            net_local:
+                ipv4_address: 10.48.0.3
+        ports: 
+            - "8888"
+ 
+
+networks:
+    net_local:
+        ipam:
+            driver: default
+            config:
+                - subnet: 10.48.0.1/24
+                  gateway: 10.48.0.99
+
+
+
+
+
+
+
+
+
+
